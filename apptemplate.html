@@ -1,0 +1,75 @@
+<html>
+  <head>
+    <!-- Material Design Lite -->
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <!-- Material Design icon font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  </head>
+  <body>
+    <!-- Simple header with fixed tabs. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
+                mdl-layout--fixed-tabs">
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">Title</span>
+        </div>
+        <!-- Tabs -->
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+          <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Recipes</a>
+          <a href="#fixed-tab-2" class="mdl-layout__tab">Calendar</a>
+          <a href="#fixed-tab-3" class="mdl-layout__tab">Groceries needed</a>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Title</span>
+      </div>
+      <main class="mdl-layout__content">
+        <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
+          <div class="page-content"> <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script>
+            /*global $*/
+            
+            $(function(){
+                $(".button").on("click", function(){
+                    var search2 = $(this).attr("id");
+                    var url = "https://data.cityofchicago.org/resource/6zsd-86xi.json";
+                    url += "?primary_type=" + search2;
+                    $.getJSON(url).done(function(data){
+                        $("#special").html("");
+                        $.each(data, function(i, v){
+                            var address = v.block.replace("XX", "22");
+                            var html1 = "<hr>"
+                            + "<h2>"
+                            + v.primary_type
+                            + ": "
+                            + v.date
+                            + "<br>"
+                            + "Arrest: "
+                            + v.arrest
+                            + " Place: "
+                            + v.location_description
+                            + "<br>"
+                            + "General Area of Incident: "
+                            + "<a href='https://www.google.com/maps?q=" 
+                            + address 
+                            + "'>Google Maps</a>"
+                            + "</h2>";
+                            $("#special").append(html1);
+                        });
+                    });
+                });
+            });
+        </script></div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="fixed-tab-2">
+          <div class="page-content"><!-- Your content goes here --></div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="fixed-tab-3">
+          <div class="page-content"><!-- Your content goes here --></div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
